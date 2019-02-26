@@ -23,7 +23,13 @@ export class HomeComponent implements OnInit {
     this.ofertasServices.getOfertas2()
       //.then executa uma ação quando a promessa estiver resolvida
       .then(
-        (ofertas: Oferta[])=>this.ofertas = ofertas,
+        //o que a aplicação faz no revolve da promise
+        (ofertas: Oferta[])=>{
+          console.log('a função foi resolvida depois de 3 segundos')
+          this.ofertas = ofertas}       
+      )
+      .catch(
+        //o que a aplicação faz no reject da promise
         (param: any)=>console.log(param)
       )
   }

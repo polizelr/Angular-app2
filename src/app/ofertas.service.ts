@@ -55,8 +55,7 @@ export class OfertasService{
 
 
 
-    public getOfertas(): Array<Oferta>{
-        
+    public getOfertas(): Array<Oferta>{        
         return this.ofertas
     }
 
@@ -66,12 +65,29 @@ export class OfertasService{
         //resolvida ou rejeitada
         return new Promise((resolve, reject)=>{
             console.log('será que passou por aqui?')     
-            let deu_certo = false
-            if(deu_certo)            
+            let deu_certo = true
+            if(deu_certo){ 
+                //o resolve passa essa informação para o then
+                setTimeout(()=>resolve(this.ofertas),3000)           
                 //algum tipo de processamento que ao finalizar chama  a função resolve ou a função reject
-                resolve(this.ofertas) //resolve pega a informação this.ofertas e passa pra o .then
+                //resolve(this.ofertas) //resolve pega a informação this.ofertas e passa pra o .then
+            }
             else
                 reject({codigo_erro: 404, mensagem_erro: 'Servidor não encontrado'})
+        })
+        .then((ofertas: Oferta[])=>{
+            console.log('primeiro then')
+            return ofertas   
+        })
+        .then((ofertas: Oferta[])=>{
+            console.log('segundo then')
+            return new Promise((resolve2, reject2)=>{
+                setTimeout(()=>{resolve2(ofertas)},300)
+            })   
+        })
+        .then((ofertas: Oferta[]) => {
+            console.log('terceito then executado após 3 segundos porque estava aguardando uma promise ser resolvida')
+            return ofertas
         })
     }
 
