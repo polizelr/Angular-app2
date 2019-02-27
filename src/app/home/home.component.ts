@@ -20,12 +20,11 @@ export class HomeComponent implements OnInit {
     // console.log(this.ofertas)
 
     //getOfertas2() retorna uma promessa e é necessário explicar como essa promessa, quando devolvida, vai ser trabalhada
-    this.ofertasServices.getOfertas2()
+    this.ofertasServices.getOfertas()
       //.then executa uma ação quando a promessa estiver resolvida
       .then(
         //o que a aplicação faz no revolve da promise
-        (ofertas: Oferta[])=>{
-          console.log('a função foi resolvida depois de 3 segundos')
+        (ofertas: Oferta[]) => {          
           this.ofertas = ofertas}       
       )
       .catch(
